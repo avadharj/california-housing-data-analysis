@@ -24,6 +24,16 @@ def predict_api():
     print(output[0]) # since this is a 2d array
     return jsonify(output[0])
 
+# code that will take all the input in the form of an html form and then post the values in that form to the model
+@app.route('/predict',methods = ['POST'])
+def predict():
+    data = [float(x) for x in request.form.values()] # the ML model expects numerical input for its features. Data from web applications usually come as strings
+    final_input = scalar.transform(np.array(data).reshape(1,-1))
+    print(final_input)
+    output = regmodel.predict(final_input)[0]
+    return render_template("home.html", prediction_text= "The House price prediction is {}".format(output))
+
+
 # runs the whole thing and having debug = true allows future debugging
 if __name__=="__main__":
     app.run(debug=True)
