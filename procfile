@@ -1,0 +1,8 @@
+web: gunicorn app:app
+
+# its a configuration file used to specify how to run a web application
+
+# web:  - this part specifies the process type. web processes are those that much be able to handle incoming http traffic from internet
+# gunicorn app:app - this executes the start of the application server
+
+# Green Unicorn is a WSGI HTTP server whose job is to act as the interface between the outisde world and the Python application which is built in my case with Flask. Flask is single threaded and can only handle one request at a time whereas Guniccorn allows parallel processing
